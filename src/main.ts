@@ -1,66 +1,10 @@
-import { device } from "@shared/device";
-import { column, render, type Node } from "@busy-app/busy-lib";
-import manifest from "./appmeta/manifest.json";
-
-/** The name the app draws under; the device clears elements by this id. */
-const APP = manifest.id;
-
-/** How often the screen is redrawn. */
-const TICK_MS = 1000;
-
-const WHITE = "#FFFFFFFF";
-const SUBTLE_WHITE = "#FFFFFF80";
-
-/**
- * The frame drawn on every tick. The screen is 72×16, so two short lines are about all that fits.
- */
-function frame(ticks: number): Node {
-  return column({ justify: "center", align: "center" }, [
-    { type: "text", id: "title", text: "Hello", font: "bold", color: WHITE },
-    {
-      type: "text",
-      id: "ticks",
-      text: String(ticks),
-      font: "small",
-      color: SUBTLE_WHITE,
-    },
-  ]);
-}
-
-/** Sends one frame to the device. */
-async function draw(ticks: number): Promise<void> {
-  const elements = render(frame(ticks));
-  await device.DisplayDraw({ application_name: APP, priority: 50, elements });
-}
-
-/**
- * Entry point, called at the end of the file: the device runs this script from top to bottom and starts nothing by itself.
- */
-function main(): void {
-  let ticks = 0;
-  let stopped = false;
-
-  const report = (err: unknown) =>
-    console.error(`${APP}: ${err instanceof Error ? err.message : String(err)}`);
-
-  void draw(ticks).catch(report);
-
-  // Tick errors are reported, not thrown: one failed request must not stop the loop.
-  const timer = setInterval(() => {
-    ticks += 1;
-    void draw(ticks).catch(report);
-  }, TICK_MS);
-
-  // Back leaves the app. Once the timer is cleared and the handler detached, nothing keeps it alive and the device takes the screen back.
-  const unbind = listen("input", (event) => {
-    if (stopped || event.key !== "back" || event.action !== "short") return;
-
-    stopped = true;
-    clearInterval(timer);
-
-    // Not detached from inside the handler itself: with nothing else left the unbind stops the app on the spot, while this handler is still running.
-    setTimeout(unbind, 0);
-  });
-}
-
-main();
+import {desk} from "@shared/desk";
+import {wrap,rect,label,type Frame} from "@shared/surface";
+const colors=["101827","F6EACF","FC7358","5FC8A5","8DA6FF","D4A43F"];
+function luminance(hex:string){const c=[0,2,4].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(v=>v<=0.04045?v/12.92:Math.pow((v+0.055)/1.055,2.4));return c[0]*.2126+c[1]*.7152+c[2]*.0722;}
+desk({name:"Contrast Bench",accent:"#B695F0",motion:{"motif":"shuttle","color":"#B695F0","shine":"#F8E8FF"},initial:()=>({fg:1,bg:0,edit:0,save:[1,0],note:"Choose ink or paper"}),render:s=>{
+ const a=luminance(colors[s.fg]),b=luminance(colors[s.bg]),ratio=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+ const art:Frame=[rect("bg",0,0,72,16,"#"+colors[s.bg]+"FF"),label("ink","Aa  0123",3,2,"#"+colors[s.fg]+"FF","front","bold")];
+ return {art,title:"",value:"",lines:[ratio.toFixed(2)+":1 / "+(ratio>=4.5?"AA normal":ratio>=3?"AA large":"Below AA"),"Ink #"+colors[s.fg],"Paper #"+colors[s.bg],s.note,"Wheel: color / click: target","Start: save / hold: recall"]};},
+ action:(s,k)=>{if(k==="up"||k==="down"){const d=k==="up"?1:-1;if(s.edit)s.bg=wrap(s.bg+d,6);else s.fg=wrap(s.fg+d,6);}
+ if(k==="ok"){s.edit=1-s.edit;s.note=s.edit?"Editing paper":"Editing ink";}if(k==="start"){s.save=[s.fg,s.bg];s.note="Saved pair";}if(k==="hold-start"){[s.fg,s.bg]=s.save;s.note="Recalled pair";}}});

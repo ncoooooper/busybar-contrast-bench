@@ -4,6 +4,6 @@
   "name": "Contrast Bench",
   "version": "0.1.0",
   "api_version": "27.12.0",
-  "description": "Contrast Bench",
+  "description": "Compare LED color pairs on the device and calculate WCAG relative luminance contrast.",
   "author": "ncoooooper"
 }
