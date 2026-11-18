@@ -1,6 +1,17 @@
 {
   "app": "busybar-contrast-bench",
-  "sha256": "8e37c55e8413089f2056e2960889b301584124c4c953d0d43a3c634687faa261",
+  "sha256": "29adb60744dbc856708723823bf477e257a9899102aa1ca6d42e9b37d15fe303",
+  "rapid_input_test": {
+    "app": "io.ncoooooper.contrastbench",
+    "sha256": "29adb60744dbc856708723823bf477e257a9899102aa1ca6d42e9b37d15fe303",
+    "firmware": {
+      "name": "1.3.1",
+      "commit": "8edd2da4"
+    },
+    "heap_peak_kib": 89.4,
+    "budget_kib": 128.0,
+    "exit": "finished"
+  },
   "firmware": "1.3.1",
   "cell": 16,
   "lit": 14,
