@@ -1,0 +1,49 @@
+{
+  "app": "busybar-contrast-bench",
+  "sha256": "8e37c55e8413089f2056e2960889b301584124c4c953d0d43a3c634687faa261",
+  "firmware": "1.3.1",
+  "cell": 16,
+  "lit": 14,
+  "front": [
+    72,
+    16
+  ],
+  "rear": [
+    160,
+    80
+  ],
+  "captures": [
+    {
+      "mode": "classic",
+      "guides": [
+        "change-sample-ink",
+        "change-sample-paper"
+      ],
+      "tour": "screen-transitions",
+      "input": [
+        [
+          "up"
+        ],
+        [
+          "ok",
+          "down",
+          "start",
+          "start --hold 850"
+        ],
+        [
+          "down",
+          "up",
+          "ok"
+        ]
+      ],
+      "distinct_frames": [
+        2,
+        2,
+        5
+      ],
+      "rear_frames": 6,
+      "rear_tour": "screen-transitions-rear",
+      "exit": "finished"
+    }
+  ]
+}

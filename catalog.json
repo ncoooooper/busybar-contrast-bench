@@ -2,5 +2,5 @@
   "category": "art",
   "short_description": "Compare LED color pairs on the device and calculate WCAG relative luminance contrast.",
   "description": "Compare LED color pairs on the device and calculate WCAG relative luminance contrast. Wheel browses six authored colors for ink or background. Click changes which color you edit. Start saves the displayed pair; hold Start recalls it. Back shows the computed ratio alongside AA normal-text and large-text thresholds. The front is a real visual sample on the matrix.",
-  "changelog": "First public version."
+  "changelog": "New screen transitions and high-contrast LED previews."
 }

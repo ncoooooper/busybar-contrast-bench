@@ -4,6 +4,20 @@ Compare LED color pairs on the device and calculate WCAG relative luminance cont
 
 Put the foreground and background directly on the LED matrix. The rear gives the contrast ratio while the front lets you see how the actual letters and digits read together.
 
+## Screen transitions
+
+Change the ink and paper in turn. The front LEDs show the selected pair directly. The rear shows the contrast ratio.
+
+![Contrast Bench front display. Change the ink and paper in turn. The front LEDs show the selected pair directly. The rear shows the contrast ratio.](media/guide/screen-transitions.gif)
+
+<details>
+
+<summary>Watch the rear display</summary>
+
+![Contrast Bench rear display during the recorded controls](media/guide/screen-transitions-rear.gif)
+
+</details>
+
 ## Compare two inks on the same paper
 
 1. Start with the `Aa 0123` sample on the front. Turn the wheel to browse the six ink colors.
@@ -34,6 +48,6 @@ Open BUSY Bar Emulator. From this repository, run:
 
 Press **Back** to exit.
 
-The GIFs are excerpts from the emulator recording. Each front-display pixel is shown at 9× its original width and height. The end frames pause for reading.
+The GIFs are excerpts from the emulator recording. Each LED occupies a 16 × 16 cell with a black border. The end frames pause for reading.
 
 [Full recording](media/controls.mp4) · [Rear display](screenshots/back-1.png) · [Firmware test](EMULATOR-QA.md) · [MIT license](LICENSE)
