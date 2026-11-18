@@ -12,7 +12,7 @@
   "frames": 54,
   "distinct_frames": 22,
   "exit": "App io.ncoooooper.contrastbench exited: finished; heap peak 81.4 of 128 KiB",
-  "sha256": "5f841aa976c863cf086b9eab5b7aa64fea965b589c2d4bd14c4c6532c1dc304a",
+  "sha256": "0161316c3c6672dec4b66e1f00f2b0aa2b44447703b5f235093ba4668f7f8e99",
   "display_test": {
     "firmware": "1.3.1",
     "input": "On-device controls",
@@ -29,9 +29,9 @@
     ],
     "frames": 160,
     "distinct_by_flow": [
-      7,
-      18
+      2,
+      2
     ],
-    "exit": "App io.btype.contrastbench exited: finished; heap peak 86.6 of 128 KiB"
+    "exit": "App io.btype.contrastbench exited: finished; heap peak 84.7 of 128 KiB"
   }
 }
